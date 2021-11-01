@@ -5,15 +5,7 @@ import JSBI from 'jsbi'
 import { pack, keccak256 } from '@ethersproject/solidity'
 import { getCreate2Address } from '@ethersproject/address'
 
-import {
-  BigintIsh,
-  MINIMUM_LIQUIDITY,
-  ZERO,
-  ONE,
-  _9975,
-  _10000,
-  THREE
-} from '../constants'
+import { BigintIsh, MINIMUM_LIQUIDITY, ZERO, ONE, _9975, _10000, THREE } from '../constants'
 import { sqrt, parseBigintIsh } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
 import { Token } from './token'

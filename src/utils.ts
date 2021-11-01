@@ -20,7 +20,7 @@ export function validateAndParseAddress(address: string): string {
     invariant(false, `${address} is not a valid address.`)
   }
 }
- 
+
 export function parseBigintIsh(bigintIsh: BigintIsh): JSBI {
   return bigintIsh instanceof JSBI
     ? bigintIsh
