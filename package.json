@@ -13,7 +13,7 @@
     "nekoswap",
     "ethereum"
   ],
-  "module": "dist/v2-sdk.esm.js",
+  "module": "dist/sdk.esm.js",
   "scripts": {
     "lint": "tsdx lint src test",
     "build": "tsdx build",
