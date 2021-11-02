@@ -1,6 +1,6 @@
 import invariant from 'tiny-invariant'
 
-import { ONE, TradeType, ZERO } from '../constants'
+import { ONE, TradeType, ZERO, ChainId } from '../constants'
 import { sortedInsert } from '../utils'
 import { Currency } from './currency'
 import { CurrencyAmount } from './fractions/currencyAmount'
@@ -11,7 +11,7 @@ import { TokenAmount } from './fractions/tokenAmount'
 import { Pair } from './pair'
 import { Route } from './route'
 import { currencyEquals, Token } from './token'
-import { WETH, ETHER } from '../init'
+import { WETH, ETHER } from '../entities'
 
 /**
  * Returns the percent difference between the mid price and the execution price, i.e. price impact.
@@ -88,13 +88,13 @@ export interface BestTradeOptions {
  * In other words, if the currency is ETHER, returns the WETH token amount for the given chain. Otherwise, returns
  * the input currency amount.
  */
-function wrappedAmount(currencyAmount: CurrencyAmount, chainId: number): TokenAmount {
+function wrappedAmount(currencyAmount: CurrencyAmount, chainId: ChainId): TokenAmount {
   if (currencyAmount instanceof TokenAmount) return currencyAmount
   if (currencyAmount.currency === ETHER[chainId]) return new TokenAmount(WETH[chainId], currencyAmount.raw)
   invariant(false, 'CURRENCY')
 }
 
-function wrappedCurrency(currency: Currency, chainId: number): Token {
+function wrappedCurrency(currency: Currency, chainId: ChainId): Token {
   if (currency instanceof Token) return currency
   if (currency === ETHER[chainId]) return WETH[chainId]
   invariant(false, 'CURRENCY')
@@ -261,7 +261,7 @@ export class Trade {
     invariant(pairs.length > 0, 'PAIRS')
     invariant(maxHops > 0, 'MAX_HOPS')
     invariant(originalAmountIn === currencyAmountIn || currentPairs.length > 0, 'INVALID_RECURSION')
-    const chainId: number | undefined =
+    const chainId: ChainId | undefined =
       currencyAmountIn instanceof TokenAmount
         ? currencyAmountIn.token.chainId
         : currencyOut instanceof Token
@@ -349,7 +349,7 @@ export class Trade {
     invariant(pairs.length > 0, 'PAIRS')
     invariant(maxHops > 0, 'MAX_HOPS')
     invariant(originalAmountOut === currencyAmountOut || currentPairs.length > 0, 'INVALID_RECURSION')
-    const chainId: number | undefined =
+    const chainId: ChainId | undefined =
       currencyAmountOut instanceof TokenAmount
         ? currencyAmountOut.token.chainId
         : currencyIn instanceof Token

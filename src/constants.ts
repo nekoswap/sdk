@@ -3,6 +3,18 @@ import JSBI from 'jsbi'
 // exports for external consumption
 export type BigintIsh = JSBI | bigint | string
 
+export enum ChainId {
+  ETHEREUM = 1,
+  ROPSTEN = 3,
+  BSC = 56,
+  OEC_TEST = 65,
+  OEC = 66,
+  BSC_TEST = 97,
+  HECO = 128,
+  HECO_TEST = 256,
+  MOONRIVER = 1285
+}
+
 export enum TradeType {
   EXACT_INPUT,
   EXACT_OUTPUT

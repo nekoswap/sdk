@@ -4,7 +4,8 @@ import { Currency } from './currency'
 import { Token } from './token'
 import { Pair } from './pair'
 import { Price } from './fractions/price'
-import { WETH, ETHER } from 'init'
+import { WETH, ETHER } from 'entities'
+import { ChainId } from '../constants'
 
 export class Route {
   public readonly pairs: Pair[]
@@ -46,7 +47,7 @@ export class Route {
     this.output = output ?? path[path.length - 1]
   }
 
-  public get chainId(): number {
+  public get chainId(): ChainId {
     return this.pairs[0].chainId
   }
 }
